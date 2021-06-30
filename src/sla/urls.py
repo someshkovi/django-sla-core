@@ -4,6 +4,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('assets/', include('assets.urls')),
 ]
 
 if settings.DEBUG:
@@ -12,3 +13,6 @@ if settings.DEBUG:
     urlpatterns += [
         path('__debug__/', include(debug_toolbar.urls)),
     ]
+
+admin.site.site_title = "NMS"
+admin.site.site_header = "NMS Admin"
