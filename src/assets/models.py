@@ -1,4 +1,8 @@
 from django.db import models
+import datetime
+from django.utils import timezone
+
+from sla.settings import TIME_ZONE
 
 class AssetCommonInfo(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -46,3 +50,8 @@ class NetworkDevice(AssetCommonInfo):
 
     def __str__(self):
         return self.name
+
+    def was_added_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=7) <= self.date_added <=now
+        # return self.date_added >=timezone.now() - datetime.timedelta(days=7)

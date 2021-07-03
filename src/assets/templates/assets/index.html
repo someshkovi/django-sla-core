@@ -1,7 +1,7 @@
-{% if asset_list %}
+{% if object_list %}
     <ul>
-    {% for asset in asset_list %}
-        <li><a href="/assets/{{ asset.id }}/">{{ asset.name }}</a></li>
+    {% for asset in object_list %}
+        <li><a href="{% url 'assets:detail' asset.id %}">{{ asset.name }}</a></li>
     {% endfor %}
     </ul>
 {% else %}

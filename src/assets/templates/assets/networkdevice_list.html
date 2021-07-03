@@ -1,0 +1,22 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
+
+{% block content %}
+    <h2>Network Devices</h2>
+    <ul>
+        {% for asset in object_list %}
+            <li>{{ asset.name }}</li>
+        {% endfor %}
+    </ul>
+
+
+    {% if object_list %}
+        <ul>
+            {% for asset in object_list %}
+                <li><a href="{% url 'assets:detail' asset.id %}">{{ asset.name }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No devices are available.</p>
+    {% endif %}
+
+{% endblock %}
