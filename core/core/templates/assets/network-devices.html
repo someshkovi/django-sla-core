@@ -1,0 +1,116 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} UI Datatables {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Network Devices</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="#">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">EMS</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="#">Network Devices</a>
+					</li>
+				</ul>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card">
+						{% comment %} <div class="card-header">
+							<h4 class="card-title">Multi Filter Select</h4>
+						</div> {% endcomment %}
+						<div class="card-body">
+							<div class="table-responsive">
+								<table id="multi-filter-select" class="display table table-striped table-hover" >
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>asset_code</th>
+                                            <th>network_status</th>
+                                            <th>status</th>
+										</tr>
+									</thead>
+									<tfoot>
+										<tr>
+											<th>Name</th>
+											<th>asset_code</th>
+                                            <th>network_status</th>
+                                            <th>status</th>
+										</tr>
+									</tfoot>
+									<tbody>
+                                        {%if object_list %}
+                                            {% for asset in object_list %}
+                                                <tr>
+                                                    <td>{{ asset.name }}</td>
+                                                    <td>{{ asset.asset_code }}</td>
+                                                    <td>{{ asset.network_status }}</td>
+                                                    <td>{{ asset.status }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <p>No devices are available.</p>
+                                        {% endif %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+	<script >
+		$(document).ready(function() {
+
+			$('#multi-filter-select').DataTable( {
+				"pageLength": 10,
+				initComplete: function () {
+					this.api().columns().every( function () {
+						var column = this;
+						var select = $('<select class="form-control"><option value=""></option></select>')
+						.appendTo( $(column.footer()).empty() )
+						.on( 'change', function () {
+							var val = $.fn.dataTable.util.escapeRegex(
+								$(this).val()
+								);
+
+							column
+							.search( val ? '^'+val+'$' : '', true, false )
+							.draw();
+						} );
+
+						column.data().unique().sort().each( function ( d, j ) {
+							select.append( '<option value="'+d+'">'+d+'</option>' )
+						} );
+					} );
+				}
+			});
+		});
+	</script>
+
+{% endblock javascripts %}

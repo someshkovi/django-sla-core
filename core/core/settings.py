@@ -22,6 +22,9 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'app',
+    'assets',
+    'storage.apps.StorageConfig',
+    'reports.apps.ReportsConfig',
 
     'import_export',
 

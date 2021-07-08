@@ -2,10 +2,11 @@
 		<div class="main-header">
 
 			<!-- Logo Header -->
-			<div class="logo-header" data-background-color="dark2">
+			<div class="logo-header" data-background-color="white">
 				
-				<a href="index.html" class="logo">
-					<img src="/static/assets/img/logo.svg" alt="navbar brand" class="navbar-brand">
+				<a href="/" class="logo">
+					{% comment %} <img src="/static/assets/img/logo.svg" alt="navbar brand" class="navbar-brand"> {% endcomment %}
+					EMS Overview
 				</a>
 				<button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon">
@@ -22,7 +23,7 @@
 			<!-- End Logo Header -->
 
 			<!-- Navbar Header -->
-			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="dark">
+			<nav class="navbar navbar-header navbar-expand-lg" data-background-color="white">
 				
 				{% if request.user.is_authenticated %}
 				<div class="container-fluid">
