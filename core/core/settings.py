@@ -74,10 +74,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'core.wsgi.application'
 
 if DEBUG:
-    INSTALLED_APPS+= ['debug_toolbar',]
-    MIDDLEWARE += [
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    ]
 
     DATABASES = {
         'default': {
@@ -88,6 +84,10 @@ if DEBUG:
     
     ALLOWED_HOSTS += ['127.0.0.1','*']
 
+    INSTALLED_APPS+= ['debug_toolbar',]
+    MIDDLEWARE += [
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    ]
 
     DEBUG_TOOLBAR_PANELS = [
         'debug_toolbar.panels.history.HistoryPanel',
