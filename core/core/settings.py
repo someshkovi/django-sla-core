@@ -1,6 +1,7 @@
 import os
 from decouple import config
 from pathlib import Path
+from django.conf import settings #because django toolbar settings are failing in tests
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -107,7 +108,7 @@ if DEBUG:
     ]
 
     def show_toolbar(request):
-        return True
+        return settings.DEBUG #writing instead of just true to avoid errors in tests
 
     DEBUG_TOOLBAR_CONFIG = {
         'INTERCEPT_REDIRECTS': False,
