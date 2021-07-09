@@ -26,6 +26,8 @@ urlpatterns = [
     path('storage/', include('storage.urls')),
     path('servers/', TemplateView.as_view(template_name='assets/servers.html')),
     path('reports/', include('reports.urls')),
+    path('snippets/', include('snippets.urls')),
+    path('polls/', include('polls.urls')),
     path('', TemplateView.as_view(template_name='index.html')),
 ]
 

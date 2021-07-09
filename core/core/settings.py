@@ -25,8 +25,12 @@ INSTALLED_APPS = [
     'assets',
     'storage.apps.StorageConfig',
     'reports.apps.ReportsConfig',
+    'snippets.apps.SnippetsConfig',
+    'polls.apps.PollsConfig',
 
     'import_export',
+    'django_extensions',
+    'rest_framework',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -54,7 +58,7 @@ TEMPLATE_DIR = os.path.join(CORE_DIR, "core/templates")  # ROOT dir for template
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATE_DIR],
+        'DIRS': [BASE_DIR / 'templates', TEMPLATE_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -168,3 +172,14 @@ STATICFILES_DIRS = (
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    ### Use Django's standard `django.contrib.auth` permissions,
+    ### or allow read-only access for unauthenticated users.
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    # ],
+
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10,
+}
