@@ -1,0 +1,149 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Storge {% endblock %} 
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+
+	<div class="content">
+		<div class="page-inner">
+			<div class="page-header">
+				<h4 class="page-title">Storage</h4>
+				<ul class="breadcrumbs">
+					<li class="nav-home">
+						<a href="/">
+							<i class="flaticon-home"></i>
+						</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="/">Dashboard</a>
+					</li>
+					<li class="separator">
+						<i class="flaticon-right-arrow"></i>
+					</li>
+					<li class="nav-item">
+						<a href="/storage">Storage</a>
+					</li>
+				</ul>
+			</div>
+            <div><iframe src="http://10.66.43.42:3000/d-solo/hr9RL45Mz/storage-status?orgId=1&theme=light&panelId=4" width="100%" height="200" frameborder="0"></iframe></div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Storage Utilization</div>
+						</div>
+						<div class="card-body">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr>
+										<th scope="col">File System</th>
+										<th scope="col">size_TB</th>
+										<th scope="col">usage_percent</th>
+										<th scope="col">added_time</th>
+									</tr>
+								</thead>
+                                
+								<tbody>
+                                    {%if StorageUtilSummaryList %}
+                                        {% for asset in StorageUtilSummaryList %}
+                                            <tr>
+                                                <td>{{ asset.file_system }}</td>
+                                                <td>{{ asset.size_TB }}</td>
+                                                <td>{{ asset.usage_percent }}</td>
+                                                <td>{{ asset.added_time }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>Data not available.</p>
+                                    {% endif %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Storage Tape Policy Summary</div>
+						</div>
+						<div class="card-body">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr>
+										<th scope="col">Policy</th>
+										<th scope="col">Percent Used</th>
+										<th scope="col">Media Count</th>
+										<th scope="col">In Archive</th>
+                                        <th scope="col">Media Unavailable</th>
+									</tr>
+								</thead>
+                                
+								<tbody>
+                                    {%if StorageTapePolicySummaryList %}
+                                        {% for asset in StorageTapePolicySummaryList %}
+                                            <tr>
+                                                <td>{{ asset.classId }}</td>
+                                                <td>{{ asset.percentUsed }}</td>
+                                                <td>{{ asset.mediaId }}</td>
+                                                <td>{{ asset.archive }}</td>
+                                                <td>{{ asset.unavail }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>Data not available.</p>
+                                    {% endif %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card">
+						<div class="card-header">
+							<div class="card-title">Primary Storage Status</div>
+						</div>
+						<div class="card-body">
+							<table class="table table-hover table-bordered">
+								<thead>
+									<tr>
+										<th scope="col">Storage Unit</th>
+										<th scope="col">Storage Module</th>
+										<th scope="col">Status</th>
+										<th scope="col">Date</th>
+									</tr>
+								</thead>
+                                
+								<tbody>
+                                    {%if storage_status_list %}
+                                        {% for asset in storage_status_list %}
+                                            <tr>
+                                                <td>{{ asset.get_storageUnit_display }}</td>
+                                                <td>{{ asset.storageModule }}</td>
+                                                <td>{{ asset.get_status_display }}</td>
+                                                <td>{{ asset.dateToday }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    {% else %}
+                                        <p>Data not available.</p>
+                                    {% endif %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+{% endblock javascripts %}

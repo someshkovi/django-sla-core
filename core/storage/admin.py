@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import PrimaryStroageTraps, PrimaryStorageModuleStatus
+from storage.models import PrimaryStroageTraps, PrimaryStorageModuleStatus, StorageUtilSummary, StorageTapePolicySummary
 
 @admin.register(PrimaryStorageModuleStatus)
 class PrimayStorageModuelStatusAdmin(admin.ModelAdmin):
@@ -8,6 +8,16 @@ class PrimayStorageModuelStatusAdmin(admin.ModelAdmin):
 
 
 @admin.register(PrimaryStroageTraps)
-class PrimayStorageTraps(admin.ModelAdmin):
+class PrimayStorageTrapsAdmin(admin.ModelAdmin):
     list_display = ['storageUnit', 'message', 'date', 'time']
     list_filter = ['date']
+
+@admin.register(StorageUtilSummary)
+class StorageUtilSummaryAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in StorageUtilSummary._meta.fields if field.name != "id"]
+    list_filter = ['added_time']
+
+@admin.register(StorageTapePolicySummary)
+class StorageTapePolicySummaryAdmin(admin.ModelAdmin):
+    list_display = [field.name for field in StorageTapePolicySummary._meta.fields if field.name != "id"]
+    list_filter = ['added_time']

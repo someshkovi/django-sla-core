@@ -24,10 +24,17 @@ class PrimaryStroageTraps(models.Model):
 
 
 class PrimaryStorageModuleStatus(models.Model):
-    storageUnit = models.CharField(max_length=20)
+    storage_unit_choices = [
+        ('441545',1),
+        ('441780',2),
+    ]
+
+    storageUnit = models.CharField(choices = storage_unit_choices, max_length=20)
     storageModule = models.CharField(max_length=20)
     timeNow = models.DateTimeField()
     dateToday = models.DateField()
+
+
 
     status_choices_primary = [
         (1,'noError'),
@@ -49,3 +56,24 @@ class PrimaryStorageModuleStatus(models.Model):
 
     def __str__(self):
         return f'{self.storageUnit}, {self.storageModule}, {self.timeNow}, {self.status}'
+
+class StorageUtilSummary(models.Model):
+    file_system = models.CharField(max_length=50)
+    size_TB = models.FloatField()
+    usage_percent = models.FloatField()
+    # added_date = models.DateField('date added')
+    added_time = models.DateTimeField('time added',null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.file_system}, {self.usage_percent}'
+
+class StorageTapePolicySummary(models.Model):
+    classId = models.CharField(max_length=50)
+    percentUsed = models.FloatField()
+    mediaId = models.SmallIntegerField('Count of media')
+    archive = models.SmallIntegerField()
+    unavail = models.SmallIntegerField()
+    added_time = models.DateTimeField('time added',null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.classId}, {self.percentUsed}'
