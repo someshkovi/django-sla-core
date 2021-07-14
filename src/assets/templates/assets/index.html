@@ -1,9 +1,0 @@
-{% if object_list %}
-    <ul>
-    {% for asset in object_list %}
-        <li><a href="{% url 'assets:detail' asset.id %}">{{ asset.name }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No devices are available.</p>
-{% endif %}
